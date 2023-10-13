@@ -46,7 +46,12 @@ export function BookingForm() {
       <br />
       <br />
       <label>Номер телефона</label>
-      <input type="text" {...register('tel')} />
+      <input
+        type="tel"
+        {...register('tel')}
+        maxLength={13}
+        placeholder="+790000000-00"
+      />
       <br />
       <br />
       <label>Дата рождения</label>
