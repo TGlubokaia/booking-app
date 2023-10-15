@@ -1,16 +1,20 @@
 import { useFormContext, useWatch } from 'react-hook-form';
-import { StateInfoType, SetInfoType } from '@/core/utils/types';
+import { InfoType, SetInfoType } from '@/core/utils/types';
 import { userFields } from '@/core/utils/utils';
 import useCompletedStep from '@/core/hooks/useCompletedStep';
+import TextInput from '@/components/ui/input/input/text-input';
+import DateInput from '@/components/ui/date-input/date-input';
+
 
 type Props = {
-  info: StateInfoType;
+  info: InfoType;
   handleInfo: SetInfoType;
 };
 
 function UserDetails(props: Props) {
   const {
     register,
+    control,
     formState: { errors },
   } = useFormContext();
   const updatedFields = useWatch({ name: userFields });
@@ -20,28 +24,31 @@ function UserDetails(props: Props) {
   return (
     <>
       <label>Фамилия</label>
-      <input type="text" {...register('lastName')} />
-      <br />
-      <br />
-      <label>Имя</label>
-      <input type="text" {...register('firstName')} />
-      <br />
-      <br />
-      <label>Отчество</label>
-      <input type="text" {...register('fatherName')} />
-      <br />
-      <br />
-      <label>Номер телефона</label>
-      <input
-        type="tel"
-        {...register('tel')}
-        maxLength={13}
-        placeholder="+790000000-00"
+      <TextInput
+        control={control}
+        inputName={'lastName'}
       />
-      <br />
-      <br />
+      <label>Имя</label>
+      <TextInput
+        control={control}
+        inputName={'firstName'}
+      />
+      <label>Отчество</label>
+      <TextInput
+        control={control}
+        inputName={'fatherName'}
+      />
+      <label>Номер телефона</label>
+      <TextInput
+        control={control}
+        inputName={'tel'}
+      />
       <label>Дата рождения</label>
-      <input type="date" {...register('birthDate')} />
+      <br />
+      <DateInput
+        control={control}
+        inputName={'birthDate'}
+      />
     </>
   );
 }

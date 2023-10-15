@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '@/features/booking-form/schema';
 
 export function BookingForm({ children }: { children: React.ReactNode }) {
-  const methods = useForm({ mode: 'onBlur', resolver: yupResolver(schema) });
+  const methods = useForm({ mode: 'onTouched', resolver: yupResolver(schema) });
 
   return (
     <FormProvider {...methods}>

@@ -1,16 +1,20 @@
 import { useFormContext, useWatch } from 'react-hook-form';
-import { StateInfoType, SetInfoType } from '@/core/utils/types';
+import { InfoType, SetInfoType } from '@/core/utils/types';
 import { priceFields } from '@/core/utils/utils';
 import useCompletedStep from '@/core/hooks/useCompletedStep';
+import TextInput from '@/components/ui/input/input/text-input';
+import CheckboxInput from '@/components/ui/checkbox/checkbox';
+import SelectInput from '@/components/ui/select/select';
 
 type Props = {
-  info: StateInfoType;
+  info: InfoType;
   handleInfo: SetInfoType;
 };
 
 function PriceDetails(props: Props) {
   const {
     register,
+    control,
     formState: { errors },
   } = useFormContext();
   const updatedFields = useWatch({ name: priceFields });
@@ -20,31 +24,39 @@ function PriceDetails(props: Props) {
   return (
     <>
       <label>Количество взрослых</label>
-      <input type="number" {...register('adults')} />
-      <br />
-      <br />
+      <TextInput
+        control={control}
+        inputName={'adults'}
+        type={'number'}
+      />
       <label>Количество детей от 5 до 12 лет</label>
-      <input type="number" {...register('middleChildhood')} />
-      <br />
-      <br />
+      <TextInput
+        control={control}
+        inputName={'middleChildhood'}
+        type={'number'}
+      />
       <label>Количество детей до 5 лет</label>
-      <input type="number" {...register('earlyChildhood')} />
-      <br />
-      <br />
+      <TextInput
+        control={control}
+        inputName={'earlyChildhood'}
+        type={'number'}
+      />
       <label>Тип номера</label>
-      <select {...register('suit')}>
-        <option value="эконом">эконом</option>
-        <option value="стандарт">стандарт</option>
-        <option value="люкс">люкс</option>
-      </select>
-      <br />
-      <br />
+      <SelectInput
+        control={control}
+        selectName={'suit'}
+      />
       <label>Количество ночей</label>
-      <input type="number" {...register('nights')} />
-      <br />
-      <br />
+      <TextInput
+        control={control}
+        inputName={'nights'}
+        type={'number'}
+      />
       <label>Страховка</label>
-      <input type="checkbox" {...register('isInsured')} />
+      <CheckboxInput
+        control={control}
+        checkboxName={'isInsured'}
+      />
     </>
   );
 }
