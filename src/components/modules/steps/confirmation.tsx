@@ -1,4 +1,5 @@
 import { useFormContext } from 'react-hook-form';
+import { suitCategories } from '@/core/utils/utils';
 
 function Confirmation() {
   const { getValues } = useFormContext();
@@ -11,7 +12,7 @@ function Confirmation() {
         {data.fatherName && ' ' + data.fatherName}
       </p>
       <p>{data.tel}</p>
-      <p>{'Номер ' + data.suit + ' на ' + data.nights + ' ночей'}</p>
+      <p>{'Номер "' + suitCategories[data.suit] + '" на ' + data.nights + ' ночей'}</p>
       <p>
         {data.adults + ' взрослых'}
         {data.middleChildhood &&

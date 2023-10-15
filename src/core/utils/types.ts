@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 export type StepInfoType = {
   title: string;
-  isCompleted: boolean;
+  required?: string[];
 };
 
 export type InfoType = {
@@ -14,3 +14,8 @@ export type StateInfoType = SetStateAction<InfoType>;
 export type SetInfoType = Dispatch<StateInfoType>;
 
 export type StepType = number;
+
+export type SuitCategoryType = {
+  [key: string]: string;
+};
+

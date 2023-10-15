@@ -1,82 +1,47 @@
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import BookingForm from '@/features/booking-form/booking-form';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import UserDetails from './steps/user-details';
 import PriceDetails from './steps/price-details';
 import Confirmation from './steps/confirmation';
-import { steps } from '@/core/utils/utils';
-import { StepInfoType, StepType } from '@/core/utils/types';
+import { stepsInfo } from '@/core/utils/utils';
+import Button from '@mui/material/Button'
 
-function BookingStep() {
-  const [stepsInfo, setStepsInfo] = useState(steps);
-  const [activeStep, setActiveStep] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+type BookingStepType = {
+  handleNext: () => void;
+  handleBack: () => void;
+  step: number;
+  isDisabledButton: boolean;
+}
 
-  const router = useRouter();
-
-  const activeStepInfo: StepInfoType = { ...stepsInfo[activeStep] };
-
-  const returnHandler = (step: StepType) => {
-    if (step) {
-      setActiveStep((step -= 1));
-    }
-    return;
-  };
-
-  const forwardHandler = (
-    step: StepType,
-    stepInfo: StepInfoType,
-    cb: () => void
-  ) => {
-    if (step == 2) {
-      cb();
-      return;
-    }
-    if (stepInfo.isCompleted) {
-      setActiveStep((step += 1));
-    }
-  };
-
-  const getStepComponent = (step: StepType) => {
-    switch (step) {
-      case 0:
-        return <PriceDetails info={stepsInfo} handleInfo={setStepsInfo} />;
-      case 1:
-        return <UserDetails info={stepsInfo} handleInfo={setStepsInfo} />;
-      case 2:
-        return <Confirmation />;
-      default:
-        return null;
-    }
-  };
-
-  const fetchData = async (e: MouseEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setTimeout(() => {
-      console.log('Data');
-      router.push('/success');
-      setIsLoading(false);
-    }, 2000);
-  };
-
+function BookingStep(props: BookingStepType) {
   return (
     <>
-      <h3>{activeStepInfo.title}</h3>
-      <BookingForm>{getStepComponent(activeStep)}</BookingForm>
+      <h3>{stepsInfo[props.step].title}</h3>
+      <div>
+        {props.step == 0 && <PriceDetails />}
+        {props.step == 1 && <UserDetails />}
+        {props.step == 2 && <Confirmation />}
+      </div>
       <br />
-      {!!activeStep && (
-        <button onClick={() => returnHandler(activeStep)}>Назад</button>
-      )}
-      <br />
-      <button
-        disabled={!activeStepInfo.isCompleted}
-        onClick={(e) =>
-          forwardHandler(activeStep, activeStepInfo, () => fetchData(e))
-        }
-      >
-        {activeStep == 2 ? 'Оплатить' : 'Далее'} {isLoading && 'isLoading'}
-      </button>
+      <div>
+        {props.step > 0 && (
+          <Button
+            variant={'contained'}
+            onClick={props.handleBack}
+          >
+            Назад
+          </Button>
+        )}
+        <br />
+        <br />
+        <Button
+          variant={'contained'}
+          disabled={props.isDisabledButton}
+          onClick={props.step < 2 ? props.handleNext : undefined}
+        >
+          {props.step < 2 ? 'Далее' : 'Оплатить'}
+        </Button>
+      </div>
     </>
   );
 }

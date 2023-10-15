@@ -1,25 +1,9 @@
-import { useFormContext, useWatch } from 'react-hook-form';
-import { InfoType, SetInfoType } from '@/core/utils/types';
-import { userFields } from '@/core/utils/utils';
-import useCompletedStep from '@/core/hooks/useCompletedStep';
+import { useFormContext } from 'react-hook-form';
 import TextInput from '@/components/ui/input/input/text-input';
 import DateInput from '@/components/ui/date-input/date-input';
 
-
-type Props = {
-  info: InfoType;
-  handleInfo: SetInfoType;
-};
-
-function UserDetails(props: Props) {
-  const {
-    register,
-    control,
-    formState: { errors },
-  } = useFormContext();
-  const updatedFields = useWatch({ name: userFields });
-
-  useCompletedStep(updatedFields, errors, props.info, props.handleInfo, 1);
+function UserDetails() {
+  const { control } = useFormContext();
 
   return (
     <>
@@ -27,27 +11,32 @@ function UserDetails(props: Props) {
       <TextInput
         control={control}
         inputName={'lastName'}
+        defaultValue={''}
       />
       <label>Имя</label>
       <TextInput
         control={control}
         inputName={'firstName'}
+        defaultValue={''}
       />
       <label>Отчество</label>
       <TextInput
         control={control}
         inputName={'fatherName'}
+        defaultValue={''}
       />
       <label>Номер телефона</label>
       <TextInput
         control={control}
         inputName={'tel'}
+        defaultValue={''}
       />
       <label>Дата рождения</label>
       <br />
       <DateInput
         control={control}
         inputName={'birthDate'}
+        defaultValue={''}
       />
     </>
   );
