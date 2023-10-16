@@ -2,18 +2,22 @@ import {
   Control,
   FieldPath,
   FieldValues,
+  FieldPathValue,
   useController,
 } from "react-hook-form";
 
 import Select from "@mui/material/Select";
 import MenuItem from '@mui/material/MenuItem';
+import { suitCategories } from "@/core/utils/utils";
 
 interface SelectInputProps<
   TFieldsValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldsValues> = FieldPath<TFieldsValues>,
 > {
   control: Control<TFieldsValues>;
+  label: string;
   selectName: TFieldName;
+  defaultValue?: FieldPathValue<TFieldsValues, TFieldName>
 };
 
 const SelectInput = <
@@ -27,18 +31,24 @@ const SelectInput = <
   } = useController({
     name: props.selectName,
     control: props.control,
+    defaultValue: props.defaultValue
   });
 
   return (
-    <Select
-      fullWidth
-      {...field}
-    >
-      <MenuItem value={'эконом'}>эконом</MenuItem>
-      <MenuItem value={'стандарт'}>стандарт</MenuItem>
-      <MenuItem value={'люкс'}>люкс</MenuItem>
-    </Select>
-
+    <>
+      <label>{props.label}</label>
+      <Select
+        inputProps={{ 'aria-label': 'controlled' }}
+        size="small"
+        fullWidth
+        variant="outlined"
+        {...field}
+      >
+        {Object.keys(suitCategories).map((category) => (
+          <MenuItem key={category} value={category}>{suitCategories[category]}</MenuItem>
+        ))}
+      </Select>
+    </>
   );
 };
 

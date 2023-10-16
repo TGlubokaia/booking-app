@@ -1,8 +1,8 @@
-import { ComponentProps } from "react";
 import {
   Control,
   FieldPath,
   FieldValues,
+  FieldPathValue,
   useController,
 } from "react-hook-form";
 
@@ -13,7 +13,9 @@ interface CheckboxProps<
   TFieldName extends FieldPath<TFieldsValues> = FieldPath<TFieldsValues>,
 > {
   control: Control<TFieldsValues>;
+  label: string;
   checkboxName: TFieldName;
+  defaultValue?: FieldPathValue<TFieldsValues, TFieldName>
 }
 
 const CheckboxInput = <
@@ -22,19 +24,23 @@ const CheckboxInput = <
 >(
   props: CheckboxProps<TFieldsValues, TFieldName>,
 ) => {
-  const { checkboxName, control, ...rest } = props;
   const {
     field,
   } = useController({
-    name: checkboxName,
-    control: control,
+    name: props.checkboxName,
+    control: props.control,
+    defaultValue: props.defaultValue
   });
 
   return (
-    <Checkbox
-      defaultValue={'false'}
-      {...field}
-    />
+    <>
+      <label>{props.label}</label>
+      <Checkbox
+        checked={field.value}
+        {...field}
+      />
+    </>
+
   );
 };
 

@@ -2,6 +2,7 @@ import {
   Control,
   FieldPath,
   FieldValues,
+  FieldPathValue,
   useController,
 } from "react-hook-form";
 
@@ -13,7 +14,9 @@ interface TextInputProps<
 > {
   control: Control<TFieldsValues>;
   inputName: TFieldName;
-  type?: string
+  type?: string;
+  label: string;
+  defaultValue?: FieldPathValue<TFieldsValues, TFieldName>
 };
 
 const TextInput = <
@@ -28,19 +31,23 @@ const TextInput = <
   } = useController({
     name: props.inputName,
     control: props.control,
+    defaultValue: props.defaultValue,
   });
 
   return (
-    <TextField
-      helperText={error ? error.message : null}
-      defaultValue=""
-      size="small"
-      error={!!error}
-      fullWidth
-      variant="outlined"
-      type={props.type}
-      {...field}
-    />
+    <>
+      <label>{props.label}</label>
+      <TextField
+        helperText={error ? error.message : null}
+        size="small"
+        error={!!error}
+        fullWidth
+        variant="outlined"
+        type={props.type}
+        {...field}
+      />
+    </>
+
   );
 };
 

@@ -1,51 +1,65 @@
 import { useFormContext } from 'react-hook-form';
-import TextInput from '@/components/ui/input/input/text-input';
+import TextInput from '@/components/ui/text/text-input';
 import CheckboxInput from '@/components/ui/checkbox/checkbox';
 import SelectInput from '@/components/ui/select/select';
+import RadioButtons from '@/components/ui/radio-buttons/radio-buttons';
+import SwitchButton from '@/components/ui/switch-button/switch-button';
 
 function PriceDetails() {
   const { control } = useFormContext();
 
   return (
     <>
-      <label>Количество взрослых</label>
       <TextInput
+        label={'Количество взрослых'}
         control={control}
         inputName={'adults'}
         type={'number'}
         defaultValue={''}
       />
-      <label>Количество детей от 5 до 12 лет</label>
       <TextInput
+        label={'Количество детей от 5 до 12 лет'}
         control={control}
         inputName={'middleChildhood'}
         type={'number'}
         defaultValue={''}
       />
-      <label>Количество детей до 5 лет</label>
       <TextInput
+        label={'Количество детей до 5 лет'}
         control={control}
         inputName={'earlyChildhood'}
         type={'number'}
         defaultValue={''}
       />
-      <label>Тип номера</label>
-      <SelectInput
+      {/* <SelectInput
+        label={'Тип номера'}
         control={control}
         selectName={'suit'}
         defaultValue={'econom'}
+      /> */}
+      <RadioButtons
+        label={'Тип номера'}
+        control={control}
+        radioName={'suit'}
+        defaultValue={'econom'}
       />
-      <label>Количество ночей</label>
       <TextInput
+        label={'Количество ночей'}
         control={control}
         inputName={'nights'}
         type={'number'}
         defaultValue={''}
       />
-      <label>Страховка</label>
-      <CheckboxInput
+      {/* <CheckboxInput
+        label={'Страховка'}
         control={control}
         checkboxName={'isInsured'}
+        defaultValue={false}
+      /> */}
+      <SwitchButton
+        label={'Страховка'}
+        control={control}
+        switchName={'isInsured'}
         defaultValue={false}
       />
     </>

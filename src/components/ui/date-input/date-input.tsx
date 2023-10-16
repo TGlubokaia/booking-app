@@ -2,25 +2,28 @@ import {
   Control,
   FieldPath,
   FieldValues,
+  FieldPathValue,
   useController,
 } from "react-hook-form";
 
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import TextField from "@mui/material/TextField";
 
-interface DateInputProps<
+interface TextInputProps<
   TFieldsValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldsValues> = FieldPath<TFieldsValues>,
 > {
   control: Control<TFieldsValues>;
-  inputName: TFieldName
-}
+  inputName: TFieldName;
+  label: string;
+  type?: string
+  defaultValue?: FieldPathValue<TFieldsValues, TFieldName>
+};
+
 const DateInput = <
   TFieldsValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldsValues> = FieldPath<TFieldsValues>,
 >(
-  props: DateInputProps<TFieldsValues, TFieldName>,
+  props: TextInputProps<TFieldsValues, TFieldName>,
 ) => {
   const {
     field,
@@ -28,19 +31,25 @@ const DateInput = <
   } = useController({
     name: props.inputName,
     control: props.control,
+    defaultValue: props.defaultValue
   });
 
-  console.log(error);
-
   return (
-    // Нужна доработка
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker
+    <>
+      <label>{props.label}</label>
+      <TextField
+        type="date"
+        size="small"
         fullWidth
-        slotProps={{ textField: { error: !!error, helperText: error?.message } }}
-        defaultValue=""
-        {...field} />
-    </LocalizationProvider>
+        variant="outlined"
+        error={!!error}
+        helperText={error ? error.message : null}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        {...field}
+      />
+    </>
 
   );
 };
