@@ -12,7 +12,13 @@ function Confirmation() {
         {data.fatherName && ' ' + data.fatherName}
       </p>
       <p>{data.tel}</p>
-      <p>{'Номер "' + suitCategories[data.suit] + '" на ' + data.nights + ' ночей'}</p>
+      <p>
+        {'Номер "' +
+          suitCategories[data.suit] +
+          '" на ' +
+          data.nights +
+          ' ночей'}
+      </p>
       <p>
         {data.adults + ' взрослых'}
         {data.middleChildhood &&

@@ -4,14 +4,14 @@ import UserDetails from './steps/user-details';
 import PriceDetails from './steps/price-details';
 import Confirmation from './steps/confirmation';
 import { stepsInfo } from '@/core/utils/utils';
-import Button from '@mui/material/Button'
+import Button from '@mui/material/Button';
 
 type BookingStepType = {
   handleNext: () => void;
   handleBack: () => void;
   step: number;
   isDisabledButton: boolean;
-}
+};
 
 function BookingStep(props: BookingStepType) {
   return (
@@ -25,10 +25,7 @@ function BookingStep(props: BookingStepType) {
       <br />
       <div>
         {props.step > 0 && (
-          <Button
-            variant={'contained'}
-            onClick={props.handleBack}
-          >
+          <Button variant={'contained'} onClick={props.handleBack}>
             Назад
           </Button>
         )}

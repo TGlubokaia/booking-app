@@ -4,9 +4,9 @@ import {
   FieldValues,
   FieldPathValue,
   useController,
-} from "react-hook-form";
+} from 'react-hook-form';
 
-import TextField from "@mui/material/TextField";
+import TextField from '@mui/material/TextField';
 
 interface TextInputProps<
   TFieldsValues extends FieldValues = FieldValues,
@@ -16,14 +16,14 @@ interface TextInputProps<
   inputName: TFieldName;
   type?: string;
   label: string;
-  defaultValue?: FieldPathValue<TFieldsValues, TFieldName>
-};
+  defaultValue?: FieldPathValue<TFieldsValues, TFieldName>;
+}
 
 const TextInput = <
   TFieldsValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldsValues> = FieldPath<TFieldsValues>,
 >(
-  props: TextInputProps<TFieldsValues, TFieldName>,
+  props: TextInputProps<TFieldsValues, TFieldName>
 ) => {
   const {
     field,
@@ -47,7 +47,6 @@ const TextInput = <
         {...field}
       />
     </>
-
   );
 };
 

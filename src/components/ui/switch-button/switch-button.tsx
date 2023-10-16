@@ -6,30 +6,27 @@ import {
   useController,
 } from 'react-hook-form';
 
-import TextField from '@mui/material/TextField';
+import Switch from '@mui/material/Switch';
 
-interface DateInputProps<
+interface SwitchButtonProps<
   TFieldsValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldsValues> = FieldPath<TFieldsValues>,
 > {
   control: Control<TFieldsValues>;
-  inputName: TFieldName;
-  label: string;
+  switchName: TFieldName;
   type?: string;
+  label: string;
   defaultValue?: FieldPathValue<TFieldsValues, TFieldName>;
 }
 
-const DateInput = <
+const SwitchButton = <
   TFieldsValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldsValues> = FieldPath<TFieldsValues>,
 >(
-  props: DateInputProps<TFieldsValues, TFieldName>
+  props: SwitchButtonProps<TFieldsValues, TFieldName>
 ) => {
-  const {
-    field,
-    fieldState: { error },
-  } = useController({
-    name: props.inputName,
+  const { field } = useController({
+    name: props.switchName,
     control: props.control,
     defaultValue: props.defaultValue,
   });
@@ -37,20 +34,9 @@ const DateInput = <
   return (
     <>
       <label>{props.label}</label>
-      <TextField
-        type="date"
-        size="small"
-        fullWidth
-        variant="outlined"
-        error={!!error}
-        helperText={error ? error.message : null}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        {...field}
-      />
+      <Switch checked={field.value} {...field} />
     </>
   );
 };
 
-export default DateInput;
+export default SwitchButton;

@@ -18,4 +18,3 @@ export type StepType = number;
 export type SuitCategoryType = {
   [key: string]: string;
 };
-

@@ -4,9 +4,9 @@ import {
   FieldValues,
   FieldPathValue,
   useController,
-} from "react-hook-form";
+} from 'react-hook-form';
 
-import Checkbox from "@mui/material/Checkbox";
+import Checkbox from '@mui/material/Checkbox';
 
 interface CheckboxProps<
   TFieldsValues extends FieldValues = FieldValues,
@@ -15,32 +15,26 @@ interface CheckboxProps<
   control: Control<TFieldsValues>;
   label: string;
   checkboxName: TFieldName;
-  defaultValue?: FieldPathValue<TFieldsValues, TFieldName>
+  defaultValue?: FieldPathValue<TFieldsValues, TFieldName>;
 }
 
 const CheckboxInput = <
   TFieldsValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldsValues> = FieldPath<TFieldsValues>,
 >(
-  props: CheckboxProps<TFieldsValues, TFieldName>,
+  props: CheckboxProps<TFieldsValues, TFieldName>
 ) => {
-  const {
-    field,
-  } = useController({
+  const { field } = useController({
     name: props.checkboxName,
     control: props.control,
-    defaultValue: props.defaultValue
+    defaultValue: props.defaultValue,
   });
 
   return (
     <>
       <label>{props.label}</label>
-      <Checkbox
-        checked={field.value}
-        {...field}
-      />
+      <Checkbox checked={field.value} {...field} />
     </>
-
   );
 };
 

@@ -10,7 +10,7 @@ import { StepType } from '@/core/utils/types';
 function BookingForm() {
   const methods = useForm({ mode: 'onTouched', resolver: yupResolver(schema) });
   const router = useRouter();
-  const { watch, formState, handleSubmit, } = methods;
+  const { watch, formState, handleSubmit } = methods;
   const { errors } = formState;
 
   const [step, setStep] = useState(0);
@@ -20,7 +20,7 @@ function BookingForm() {
     setTimeout(() => {
       console.log(data);
       router.push('/success');
-    })
+    });
   };
 
   const handleButton = (step: StepType) => {
@@ -29,20 +29,21 @@ function BookingForm() {
       case 0: {
         fieldsRequired = priceFields;
         break;
-      };
+      }
       case 1: {
         fieldsRequired = userFields;
         break;
-      };
-      default: return;
-    };
+      }
+      default:
+        return;
+    }
 
     const checkIsValid = () => {
       const invalidFields = Object.keys(errors);
       if (invalidFields.length == 0) {
         return true;
       }
-      if (invalidFields.some(element => fieldsRequired.includes(element))) {
+      if (invalidFields.some((element) => fieldsRequired.includes(element))) {
         return false;
       }
       return true;
@@ -73,7 +74,7 @@ function BookingForm() {
   }, [formState]);
 
   return (
-    <FormProvider {...methods} >
+    <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <BookingStep
           handleBack={handleBack}

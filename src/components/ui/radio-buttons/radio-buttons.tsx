@@ -6,28 +6,30 @@ import {
   useController,
 } from 'react-hook-form';
 
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from '@mui/material/Radio';
 import { suitCategories } from '@/core/utils/utils';
 
-interface SelectInputProps<
+interface RadioButtonsProps<
   TFieldsValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldsValues> = FieldPath<TFieldsValues>,
 > {
   control: Control<TFieldsValues>;
+  radioName: TFieldName;
+  type?: string;
   label: string;
-  selectName: TFieldName;
   defaultValue?: FieldPathValue<TFieldsValues, TFieldName>;
 }
 
-const SelectInput = <
+const RadioButtons = <
   TFieldsValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldsValues> = FieldPath<TFieldsValues>,
 >(
-  props: SelectInputProps<TFieldsValues, TFieldName>
+  props: RadioButtonsProps<TFieldsValues, TFieldName>
 ) => {
   const { field } = useController({
-    name: props.selectName,
+    name: props.radioName,
     control: props.control,
     defaultValue: props.defaultValue,
   });
@@ -35,21 +37,18 @@ const SelectInput = <
   return (
     <>
       <label>{props.label}</label>
-      <Select
-        inputProps={{ 'aria-label': 'controlled' }}
-        size="small"
-        fullWidth
-        variant="outlined"
-        {...field}
-      >
+      <RadioGroup {...field}>
         {Object.keys(suitCategories).map((category) => (
-          <MenuItem key={category} value={category}>
-            {suitCategories[category]}
-          </MenuItem>
+          <FormControlLabel
+            key={category}
+            value={category}
+            control={<Radio />}
+            label={suitCategories[category]}
+          />
         ))}
-      </Select>
+      </RadioGroup>
     </>
   );
 };
 
-export default SelectInput;
+export default RadioButtons;
