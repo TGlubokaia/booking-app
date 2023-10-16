@@ -3,14 +3,15 @@ import { useRouter } from 'next/navigation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '@/features/booking-form/schema';
 import BookingStep from '@/components/modules/booking-step';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { priceFields, userFields } from '@/core/utils/utils';
 import { StepType } from '@/core/utils/types';
 
 function BookingForm() {
   const methods = useForm({ mode: 'onTouched', resolver: yupResolver(schema) });
   const router = useRouter();
-  const { watch, formState: { errors }, handleSubmit } = methods;
+  const { watch, formState, handleSubmit, } = methods;
+  const { errors } = formState;
 
   const [step, setStep] = useState(0);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
@@ -20,10 +21,10 @@ function BookingForm() {
       console.log(data);
       router.push('/success');
     })
-  }
+  };
 
   const handleButton = (step: StepType) => {
-    let fieldsRequired;
+    let fieldsRequired: string[];
     switch (step) {
       case 0: {
         fieldsRequired = priceFields;
@@ -34,29 +35,30 @@ function BookingForm() {
         break;
       };
       default: return;
-    }
+    };
 
-    const isFilled = watch(fieldsRequired).every(Boolean);
     const checkIsValid = () => {
       const invalidFields = Object.keys(errors);
       if (invalidFields.length == 0) {
         return true;
-      } else {
-        invalidFields.some(element => fieldsRequired.includes(element));
       }
-    }
+      if (invalidFields.some(element => fieldsRequired.includes(element))) {
+        return false;
+      }
+      return true;
+    };
 
-    if (isFilled && checkIsValid) {
-      console.log('not disaabled');
+    const isFilled = watch(fieldsRequired).every(Boolean);
+    const isValid = checkIsValid();
+
+    if (isFilled && isValid) {
       setIsDisabledButton(false);
     } else {
-      console.log('disaabled');
       setIsDisabledButton(true);
     }
   };
 
   const handleBack = () => {
-    console.log(step);
     handleButton(step - 1);
     setStep((prev) => prev - 1);
   };
@@ -66,11 +68,13 @@ function BookingForm() {
     setStep((prev) => prev + 1);
   };
 
-
+  useEffect(() => {
+    handleButton(step);
+  }, [formState]);
 
   return (
     <FormProvider {...methods} >
-      <form onSubmit={handleSubmit(onSubmit)} onBlur={() => handleButton(step)} onChange={() => handleButton(step)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <BookingStep
           handleBack={handleBack}
           handleNext={handleNext}
