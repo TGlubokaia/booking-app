@@ -15,9 +15,7 @@ function BookingStep(props: ButtonBlockType) {
         {props.step == 2 && <Confirmation />}
       </div>
 
-      <ButtonBlock
-        {...props}
-      />
+      <ButtonBlock {...props} />
     </>
   );
 }

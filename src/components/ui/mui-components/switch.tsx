@@ -5,8 +5,10 @@ import { forwardRef } from 'react';
 const StyledSwitch = styled((props: SwitchProps, ref) => (
   <Switch
     focusVisibleClassName=".Mui-focusVisible"
-    disableRipple {...props}
-    inputRef={ref} />
+    disableRipple
+    {...props}
+    inputRef={ref}
+  />
 ))(({ theme }) => ({
   width: 58,
   height: 32,
@@ -56,15 +58,9 @@ const StyledSwitch = styled((props: SwitchProps, ref) => (
   },
 }));
 
-
 // eslint-disable-next-line react/display-name
 const CustomSwitchButton = forwardRef((props: SwitchProps, ref) => {
-  return (
-    <StyledSwitch
-      ref={ref}
-      {...props}
-    />
-  );
+  return <StyledSwitch ref={ref} {...props} />;
 });
 
 export default CustomSwitchButton;

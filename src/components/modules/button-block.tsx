@@ -31,7 +31,7 @@ const StyledButtonBack = styled(StyledButton)((props: ButtonProps) => ({
   '@media (max-width: 400px)': {
     order: 2,
   },
-}))
+}));
 
 const StyledButtonForward = styled(StyledButton)((props: ButtonProps) => ({
   height: '39px',
@@ -51,33 +51,29 @@ const StyledButtonForward = styled(StyledButton)((props: ButtonProps) => ({
   },
 
   '@media (max-width: 400px)': {
-    width: '100%'
+    width: '100%',
   },
-})
-);
+}));
 
 function ButtonBlock(props: ButtonBlockType) {
   return (
     <StyledBox>
-      {
-        props.step > 0 && (
-          <StyledButtonBack
-            variant={'contained'}
-            onClick={props.handleBack} >
-            {props.step < 2 ? 'Назад к расчету стоимости' : 'Назад к данным покупателя'}
-          </StyledButtonBack>
-        )
-      }
-      < StyledButtonForward
+      {props.step > 0 && (
+        <StyledButtonBack variant={'contained'} onClick={props.handleBack}>
+          {props.step < 2
+            ? 'Назад к расчету стоимости'
+            : 'Назад к данным покупателя'}
+        </StyledButtonBack>
+      )}
+      <StyledButtonForward
         variant={'contained'}
         disabled={props.isDisabledButton}
         onClick={props.step < 2 ? props.handleNext : undefined}
       >
         {props.step < 2 ? 'Далее' : 'Оплатить'}
-      </StyledButtonForward >
+      </StyledButtonForward>
     </StyledBox>
-
-  )
+  );
 }
 
 export default ButtonBlock;

@@ -31,7 +31,7 @@ const CustomCheckboxField = <
 ) => {
   const {
     field,
-    fieldState: { error }
+    fieldState: { error },
   } = useController({
     name: props.fieldName,
     control: props.control,
@@ -44,21 +44,20 @@ const CustomCheckboxField = <
   // const touchpad = useMediaQuery('(hover: none) and (pointer: coarse)');
 
   return (
-    <CustomFormControl
-      error={!!error}
-    >
+    <CustomFormControl error={!!error}>
       <CustomLabel>{props.label}</CustomLabel>
 
-      {minWidth400
-        ? <CustomCheckbox checked={field.value} {...field} ref={inputRef} />
-        : <CustomSwitchButton checked={field.value} {...field} ref={inputRef} />
-      }
+      {minWidth400 ? (
+        <CustomCheckbox checked={field.value} {...field} ref={inputRef} />
+      ) : (
+        <CustomSwitchButton checked={field.value} {...field} ref={inputRef} />
+      )}
 
       <CustomFormHelperText id={props.fieldName}>
         {error ? error.message : ''}
       </CustomFormHelperText>
     </CustomFormControl>
-  )
+  );
 };
 
 export default CustomCheckboxField;

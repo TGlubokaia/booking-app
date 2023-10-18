@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import Checkbox, { CheckboxProps } from '@mui/material/Checkbox';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import { forwardRef } from 'react';
 
 // eslint-disable-next-line react/display-name
@@ -9,11 +9,13 @@ const ForwardedCheckbox = forwardRef((props, ref) => {
   return (
     <Checkbox
       inputRef={ref}
-      icon={<CheckBoxOutlineBlankIcon viewBox='3 3 18 18' />}
-      checkedIcon={<CheckBoxOutlinedIcon sx={{ color: '#000000' }} viewBox='3 3 18 18' />}
+      icon={<CheckBoxOutlineBlankIcon viewBox="3 3 18 18" />}
+      checkedIcon={
+        <CheckBoxOutlinedIcon sx={{ color: '#000000' }} viewBox="3 3 18 18" />
+      }
       {...props}
     />
-  )
+  );
 });
 
 const CustomCheckbox = styled(ForwardedCheckbox)`
@@ -54,5 +56,3 @@ export default CustomCheckbox;
 //     />
 //   )
 // };
-
-

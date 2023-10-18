@@ -1,4 +1,3 @@
-
 import { suitCategories } from '@/core/utils/utils';
 import CustomRadio from './radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -7,8 +6,7 @@ import RadioGroup, { RadioGroupProps } from '@mui/material/RadioGroup';
 // eslint-disable-next-line react/display-name
 const CustomRadioButtons = (props: RadioGroupProps) => {
   return (
-    <RadioGroup
-      {...props}>
+    <RadioGroup {...props}>
       {Object.keys(suitCategories).map((category) => (
         <FormControlLabel
           key={category}
@@ -18,7 +16,7 @@ const CustomRadioButtons = (props: RadioGroupProps) => {
         />
       ))}
     </RadioGroup>
-  )
+  );
 };
 
 export default CustomRadioButtons;

@@ -30,7 +30,7 @@ const DateField = <
 ) => {
   const {
     field,
-    fieldState: { error }
+    fieldState: { error },
   } = useController({
     name: props.fieldName,
     control: props.control,
@@ -38,16 +38,9 @@ const DateField = <
   });
 
   return (
-    <CustomFormControl
-      error={!!error}
-      fullWidth
-    >
+    <CustomFormControl error={!!error} fullWidth>
       <CustomLabel>{props.label}</CustomLabel>
-      <CustomInputBase
-        type={props.type}
-        error={!!error}
-        {...field}
-      />
+      <CustomInputBase type={props.type} error={!!error} {...field} />
       <CustomFormHelperText id={props.fieldName}>
         {error ? error.message : ''}
       </CustomFormHelperText>

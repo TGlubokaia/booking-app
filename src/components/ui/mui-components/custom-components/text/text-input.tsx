@@ -10,7 +10,7 @@ import CustomFormHelperText from '../../form-helper-text';
 import CustomInputBase from '../../input-base';
 import CustomFormControl from '../../form-control';
 import CustomLabel from '@/components/ui/label';
-import { useRef } from "react";
+import { useRef } from 'react';
 
 interface TextInputProps<
   TFieldsValues extends FieldValues = FieldValues,
@@ -32,7 +32,7 @@ const TextInputField = <
 ) => {
   const {
     field,
-    fieldState: { error }
+    fieldState: { error },
   } = useController({
     name: props.fieldName,
     control: props.control,
@@ -42,10 +42,7 @@ const TextInputField = <
   const inputRef = useRef(null);
 
   return (
-    <CustomFormControl
-      error={!!error}
-      fullWidth
-    >
+    <CustomFormControl error={!!error} fullWidth>
       <CustomLabel>{props.label}</CustomLabel>
       <CustomInputBase
         error={!!error}

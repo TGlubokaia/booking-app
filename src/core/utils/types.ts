@@ -24,4 +24,4 @@ export type ButtonBlockType = {
   handleNext: () => void;
   isDisabledButton: boolean;
   step: number;
-}
+};

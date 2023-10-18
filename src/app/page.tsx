@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import BookingForm from '@/features/booking-form/booking-form';
 import styles from './page.module.css';
 

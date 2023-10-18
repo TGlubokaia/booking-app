@@ -1,7 +1,7 @@
-import { suitCategories } from "@/core/utils/utils";
-import Select, { SelectProps } from "@mui/material/Select";
-import CustomSelectInputBase from "./select-input-base";
-import MenuItem from "@mui/material/MenuItem";
+import { suitCategories } from '@/core/utils/utils';
+import Select, { SelectProps } from '@mui/material/Select';
+import CustomSelectInputBase from './select-input-base';
+import MenuItem from '@mui/material/MenuItem';
 
 // eslint-disable-next-line react/display-name
 function CustomSelect(props: SelectProps) {
@@ -18,7 +18,7 @@ function CustomSelect(props: SelectProps) {
         </MenuItem>
       ))}
     </Select>
-  )
+  );
 }
 
 export default CustomSelect;

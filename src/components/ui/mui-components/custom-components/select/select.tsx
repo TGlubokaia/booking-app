@@ -20,7 +20,7 @@ interface SelectInputProps<
   label: string;
   fieldName: TFieldName;
   defaultValue?: FieldPathValue<TFieldsValues, TFieldName>;
-};
+}
 
 const SelectField = <
   TFieldsValues extends FieldValues = FieldValues,
@@ -30,7 +30,7 @@ const SelectField = <
 ) => {
   const {
     field,
-    fieldState: { error }
+    fieldState: { error },
   } = useController({
     name: props.fieldName,
     control: props.control,
@@ -41,15 +41,13 @@ const SelectField = <
   // const touchpad = useMediaQuery('(hover: none) and (pointer: coarse)');
 
   return (
-    <CustomFormControl
-      error={!!error}
-      fullWidth
-    >
+    <CustomFormControl error={!!error} fullWidth>
       <CustomLabel>{props.label}</CustomLabel>
-      {minWidth400
-        ? <CustomRadioButtons {...field} />
-        : <CustomSelect {...field} />
-      }
+      {minWidth400 ? (
+        <CustomRadioButtons {...field} />
+      ) : (
+        <CustomSelect {...field} />
+      )}
       <CustomFormHelperText id={props.fieldName}>
         {error ? error.message : ''}
       </CustomFormHelperText>
