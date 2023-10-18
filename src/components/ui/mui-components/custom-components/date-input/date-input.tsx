@@ -6,20 +6,23 @@ import {
   useController,
 } from 'react-hook-form';
 
-import TextField from '@mui/material/TextField';
+import CustomInputBase from '../../input-base';
+import CustomFormControl from '../../form-control';
+import CustomLabel from '@/components/ui/label';
+import CustomFormHelperText from '../../form-helper-text';
 
 interface DateInputProps<
   TFieldsValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldsValues> = FieldPath<TFieldsValues>,
 > {
   control: Control<TFieldsValues>;
-  inputName: TFieldName;
+  fieldName: TFieldName;
   label: string;
   type?: string;
   defaultValue?: FieldPathValue<TFieldsValues, TFieldName>;
 }
 
-const DateInput = <
+const DateField = <
   TFieldsValues extends FieldValues = FieldValues,
   TFieldName extends FieldPath<TFieldsValues> = FieldPath<TFieldsValues>,
 >(
@@ -27,30 +30,29 @@ const DateInput = <
 ) => {
   const {
     field,
-    fieldState: { error },
+    fieldState: { error }
   } = useController({
-    name: props.inputName,
+    name: props.fieldName,
     control: props.control,
     defaultValue: props.defaultValue,
   });
 
   return (
-    <>
-      <label>{props.label}</label>
-      <TextField
-        type="date"
-        size="small"
-        fullWidth
-        variant="outlined"
+    <CustomFormControl
+      error={!!error}
+      fullWidth
+    >
+      <CustomLabel>{props.label}</CustomLabel>
+      <CustomInputBase
+        type={props.type}
         error={!!error}
-        helperText={error ? error.message : null}
-        InputLabelProps={{
-          shrink: true,
-        }}
         {...field}
       />
-    </>
+      <CustomFormHelperText id={props.fieldName}>
+        {error ? error.message : ''}
+      </CustomFormHelperText>
+    </CustomFormControl>
   );
 };
 
-export default DateInput;
+export default DateField;

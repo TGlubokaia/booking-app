@@ -1,40 +1,42 @@
 import { useFormContext } from 'react-hook-form';
-import TextInput from '@/components/ui/text/text-input';
-import DateInput from '@/components/ui/date-input/date-input';
+import TextInputField from '@/components/ui/mui-components/custom-components/text/text-input';
+import DateField from '@/components/ui/mui-components/custom-components/date-input/date-input';
 
 function UserDetails() {
   const { control } = useFormContext();
 
   return (
     <>
-      <TextInput
+      <TextInputField
         label={'Фамилия'}
         control={control}
-        inputName={'lastName'}
+        fieldName={'lastName'}
         defaultValue={''}
       />
-      <TextInput
+      <TextInputField
         label={'Имя'}
         control={control}
-        inputName={'firstName'}
+        fieldName={'firstName'}
         defaultValue={''}
       />
-      <TextInput
-        label={'fatherName'}
+      <TextInputField
+        label={'Отчество'}
         control={control}
-        inputName={'fatherName'}
+        fieldName={'fatherName'}
         defaultValue={''}
       />
-      <TextInput
+      <TextInputField
         label={'Номер телефона'}
+        placeholder={'+7XXXXXXXX-XX'}
         control={control}
-        inputName={'tel'}
+        fieldName={'tel'}
         defaultValue={''}
       />
-      <DateInput
+      <DateField
+        type={'date'}
         label={'Дата рождения'}
         control={control}
-        inputName={'birthDate'}
+        fieldName={'birthDate'}
         defaultValue={''}
       />
     </>

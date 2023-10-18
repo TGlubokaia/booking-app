@@ -18,3 +18,10 @@ export type StepType = number;
 export type SuitCategoryType = {
   [key: string]: string;
 };
+
+export type ButtonBlockType = {
+  handleBack: () => void;
+  handleNext: () => void;
+  isDisabledButton: boolean;
+  step: number;
+}

@@ -1,65 +1,51 @@
 import { useFormContext } from 'react-hook-form';
-import TextInput from '@/components/ui/text/text-input';
-import CheckboxInput from '@/components/ui/checkbox/checkbox';
-import SelectInput from '@/components/ui/select/select';
-import RadioButtons from '@/components/ui/radio-buttons/radio-buttons';
-import SwitchButton from '@/components/ui/switch-button/switch-button';
+import TextInputField from '@/components/ui/mui-components/custom-components/text/text-input';
+import SelectField from '@/components/ui/mui-components/custom-components/select/select';
+import CustomCheckboxField from '@/components/ui/mui-components/custom-components/checkbox/checkbox';
 
 function PriceDetails() {
   const { control } = useFormContext();
 
   return (
     <>
-      <TextInput
+      <TextInputField
         label={'Количество взрослых'}
         control={control}
-        inputName={'adults'}
+        fieldName={'adults'}
         type={'number'}
         defaultValue={''}
       />
-      <TextInput
+      <TextInputField
         label={'Количество детей от 5 до 12 лет'}
         control={control}
-        inputName={'middleChildhood'}
+        fieldName={'middleChildhood'}
         type={'number'}
         defaultValue={''}
       />
-      <TextInput
+      <TextInputField
         label={'Количество детей до 5 лет'}
         control={control}
-        inputName={'earlyChildhood'}
+        fieldName={'earlyChildhood'}
         type={'number'}
         defaultValue={''}
       />
-      {/* <SelectInput
+      <SelectField
         label={'Тип номера'}
         control={control}
-        selectName={'suit'}
-        defaultValue={'econom'}
-      /> */}
-      <RadioButtons
-        label={'Тип номера'}
-        control={control}
-        radioName={'suit'}
+        fieldName={'suit'}
         defaultValue={'econom'}
       />
-      <TextInput
+      <TextInputField
         label={'Количество ночей'}
         control={control}
-        inputName={'nights'}
+        fieldName={'nights'}
         type={'number'}
         defaultValue={''}
       />
-      {/* <CheckboxInput
+      <CustomCheckboxField
         label={'Страховка'}
         control={control}
-        checkboxName={'isInsured'}
-        defaultValue={false}
-      /> */}
-      <SwitchButton
-        label={'Страховка'}
-        control={control}
-        switchName={'isInsured'}
+        fieldName={'isInsured'}
         defaultValue={false}
       />
     </>

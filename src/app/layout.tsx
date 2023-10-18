@@ -1,8 +1,9 @@
+import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-const inter = Inter({
+export const inter = Inter({
   weight: ['400', '500', '600', '700'],
   style: ['normal'],
   subsets: ['cyrillic'],
@@ -21,7 +22,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <ThemeRegistry>
+        <body>
+          {children}
+        </body>
+      </ThemeRegistry>
     </html>
   );
 }
